@@ -2,8 +2,6 @@
 
 **Physically based, real-time object composition for 3D Gaussian Splatting.**
 
-> **Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization**
-
 <p align="center">
   <img src="assets/teaser3.pdf" width="90%">
 </p>
