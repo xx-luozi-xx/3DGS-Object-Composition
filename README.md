@@ -3,7 +3,7 @@
 **Physically based, real-time object composition for 3D Gaussian Splatting.**
 
 <p align="center">
-  <img src="assets/teaser3.pdf" width="90%">
+  <img src="assets/teaser.png" width="90%">
 </p>
 
 ## Overview
