@@ -2,9 +2,7 @@
 
 **Physically based, real-time object composition for 3D Gaussian Splatting.**
 
-<p align="center">
-  <img src="assets/teaser.png" width="90%">
-</p>
+![teaser](https://github.com/xx-luozi-xx/3DGS-Object-Composition/blob/main/asserts/teaser.png?raw=true)
 
 ## Overview
 
