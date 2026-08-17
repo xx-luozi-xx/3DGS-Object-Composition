@@ -18,4 +18,3 @@ Our framework achieves **over 40 FPS on consumer hardware**, enabling interactiv
 🚧 **Code coming soon.**
 
 We are currently cleaning up and preparing the codebase for public release.
-t made this work possible.
