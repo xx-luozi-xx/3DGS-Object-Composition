@@ -155,3 +155,8 @@ python main_bicycle_video.py
 ```
 
 
+## 致谢
+
+- [3DGS](https://github.com/graphdeco-inria/gaussian-splatting).
+- [gsplat](https://github.com/nerfstudio-project/gsplat)
+- [Optimal Projection](https://github.com/LetianHuang/op43dgs)
