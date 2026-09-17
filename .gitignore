@@ -1,0 +1,21 @@
+# === Python build/cache ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# === IDEs ===
+.vscode/
+
+# === Custom: ignore big data or assets ===
+model/
+tmp/
+help/
+data/sg1_1_cam/probes/*
+data/sg1_1_cam/render/*
+data/sg1_1_cam/render*
+data/**/*probes*/
