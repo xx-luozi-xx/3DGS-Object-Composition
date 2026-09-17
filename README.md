@@ -10,11 +10,25 @@
 
 This work enables **real-time, training-free object composition in pretrained 3D Gaussian Splatting (3DGS) scenes**.
 
-Given a pretrained 3DGS scene and known PBR Gaussian assets, PhysCompose reformulates light transport to efficiently account for scene illumination, object self-occlusion, and object-to-scene shadow casting—without retraining the scene or relying on computationally expensive voxel-based ray marching.
+Given a pretrained 3DGS scene and known PBR Gaussian assets, our light-transport reformulation efficiently accounts for scene illumination, object self-occlusion, and object-to-scene shadow casting—without retraining the scene or relying on computationally expensive voxel-based ray marching.
 
 Our framework achieves **over 40 FPS on consumer hardware**, enabling interactive virtual-real composition under unconstrained lighting conditions.
 
 ## Installation
+
+### Device and Software Environment
+
+This project was tested in the following environment:
+- Operating System: Ubuntu 22.04.5 LTS
+- GPU: NVIDIA GeForce RTX 3090
+- NVIDIA Driver Version: 580.95.05
+- CUDA Version Supported by the Driver: 13.0
+- CUDA Toolkit Version Installed for the Project: 12.1
+- Python Environment: Conda, Python 3.10
+
+It is recommended to use an NVIDIA discrete GPU and ensure that the VRAM meets the requirements for running the project. Although the current NVIDIA driver supports CUDA 13.0, the PyTorch, CUDA Toolkit, and related CUDA extensions used in this project are all installed based on CUDA 12.1.
+
+### Note
 
 Please execute all installation commands below in the same terminal session and do not interrupt the process.
 
@@ -27,6 +41,9 @@ If you are a user of the module, the easiest solution will be to downgrade to 'n
 ```
 
 This warning may appear temporarily during environment setup and can be safely ignored. The installation process will ultimately install `numpy==1.26.4`. After the deployment is completed successfully, warnings of this type should no longer appear.
+
+
+### Deployment
 
 ```bash
 git clone https://github.com/xx-luozi-xx/3DGS-Object-Composition.git

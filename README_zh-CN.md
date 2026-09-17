@@ -10,11 +10,27 @@
 
 本项目支持在预训练的 3D Gaussian Splatting（3DGS）场景中进行**实时、无需重新训练的物体合成**。
 
-给定一个预训练的 3DGS 场景以及已知的 PBR Gaussian 物体资产，PhysCompose 通过重新构建光传输过程，高效地处理场景光照、物体自遮挡以及物体对场景产生的阴影。该方法无需重新训练场景，也不依赖计算开销较高的基于体素的光线行进。
+给定一个预训练的 3DGS 场景和已知的 PBR 高斯资产，我们的光传输重构方法能够高效地处理场景光照、物体自遮挡以及物体对场景的阴影投射——无需重新训练场景，也不依赖计算代价高昂的基于体素的光线步进。
 
 本框架在消费级硬件上可以达到**超过 40 FPS 的运行速度**，从而支持在非受限光照条件下进行交互式虚实物体合成。
 
 ## 安装
+
+### 设备与软件环境
+
+本项目在以下环境中完成测试：
+
+- 操作系统：Ubuntu 22.04.5 LTS
+- GPU：NVIDIA GeForce RTX 3090
+- NVIDIA 驱动版本：580.95.05
+- 驱动支持的 CUDA 版本：13.0
+- 项目安装的 CUDA Toolkit 版本：12.1
+- Python 环境：Conda，Python 3.10
+
+建议使用 NVIDIA 独立显卡并确保显存满足项目运行需求。虽然当前 NVIDIA 驱动支持 CUDA 13.0，但本项目的 PyTorch、CUDA Toolkit 及相关 CUDA 扩展统一基于 CUDA 12.1 安装。
+
+### 提示
+
 
 请在同一个终端会话中按顺序执行以下所有安装命令，执行过程中请不要中断。
 
@@ -27,6 +43,8 @@ If you are a user of the module, the easiest solution will be to downgrade to 'n
 ```
 
 该警告属于部署过程中的临时提示，可以忽略。最终环境会安装 `numpy==1.26.4`。部署成功完成后，通常不应再出现此类警告。
+
+### 部署
 
 ```bash
 git clone https://github.com/xx-luozi-xx/3DGS-Object-Composition.git
