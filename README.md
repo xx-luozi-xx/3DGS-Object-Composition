@@ -6,6 +6,10 @@
 
 ![Teaser](https://github.com/xx-luozi-xx/3DGS-Object-Composition/blob/main/assets/teaser.png?raw=true)
 
+### [[Paper]](https://junkzhu.github.io/project_pages/PTIR/static/paper/Path_Traced_Inverse_3D_Gaussian.pdf)
+
+[Boyan Du](https://github.com/xx-luozi-xx), [Junke Zhu](https://github.com/junkzhu), [Haochuan Dang](), [Ang Li](https://github.com/Alan-sp), [Jixiang Hu](), [Sheng Li](https://lishengpku.github.io/), [Zhangjin Huang](http://staff.ustc.edu.cn/~zhuang/)
+
 ## Overview
 
 This work enables **real-time, training-free object composition in pretrained 3D Gaussian Splatting (3DGS) scenes**.

@@ -6,6 +6,13 @@
 
 ![示意图](https://github.com/xx-luozi-xx/3DGS-Object-Composition/blob/main/assets/teaser.png?raw=true)
 
+### [[论文]](https://junkzhu.github.io/project_pages/PTIR/static/paper/Path_Traced_Inverse_3D_Gaussian.pdf)
+
+[杜柏言](https://github.com/xx-luozi-xx), [朱均可](https://github.com/junkzhu), [党浩川](), [李昂](https://github.com/Alan-sp), [胡吉祥](), [李胜](https://lishengpku.github.io/), [黄章进](http://staff.ustc.edu.cn/~zhuang/)
+
+    
+
+
 ## 项目简介
 
 本项目支持在预训练的 3D Gaussian Splatting（3DGS）场景中进行**实时、无需重新训练的物体合成**。
