@@ -6,9 +6,9 @@
 
 ![示意图](https://github.com/xx-luozi-xx/3DGS-Object-Composition/blob/main/assets/teaser.png?raw=true)
 
-### [[论文]](https://junkzhu.github.io/project_pages/PTIR/static/paper/Path_Traced_Inverse_3D_Gaussian.pdf)
+### [[论文]](https://raw.githubusercontent.com/xx-luozi-xx/3DGS-Object-Composition/main/assets/paper.pdf)
 
-[杜柏言](https://github.com/xx-luozi-xx), [朱均可](https://github.com/junkzhu), [党浩川](), [李昂](https://github.com/Alan-sp), [胡吉祥](), [李胜](https://lishengpku.github.io/), [黄章进](http://staff.ustc.edu.cn/~zhuang/)
+[杜柏言](https://github.com/xx-luozi-xx), [朱均可](https://github.com/junkzhu), [党浩川](), [李昂](https://github.com/Alan-sp), [胡吉祥](https://github.com/HuJX2005), [李胜](https://lishengpku.github.io/), [黄章进](http://staff.ustc.edu.cn/~zhuang/)
 
     
 
