@@ -156,3 +156,25 @@ python main_bicycle_video.py
 - [3DGS](https://github.com/graphdeco-inria/gaussian-splatting).
 - [gsplat](https://github.com/nerfstudio-project/gsplat)
 - [Optimal Projection](https://github.com/LetianHuang/op43dgs)
+
+
+
+## Citation
+
+If you find this work useful in your research, please consider citing:
+
+```bibtex
+@inproceedings{du2026realtime,
+  title     = {Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization},
+  author    = {
+    Du, Boyan and
+    Zhu, Junke and
+    Dang, Haochuan and
+    Li, Ang and
+    Hu, Jixiang and
+    Li, Sheng and
+    Huang, Zhangjin
+  },
+  booktitle = {Pacific Graphics 2026},
+  year      = {2026}
+}
