@@ -80,7 +80,25 @@
       gap: 12px;
       margin: 25px 0 35px;
     }
+    .lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 100;
+  padding: 6px 16px;
+  border: 1px solid #222;
+  border-radius: 999px;
+  background: white;
+  color: #222;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
 
+.lang-switch:hover {
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+}
     .button {
   display: inline-flex;
   align-items: center;
@@ -229,6 +247,8 @@
 <body>
 
   <header>
+    <!-- 放在 <header> 里，或右上角固定位置 -->
+<a class="lang-switch" href="index_zh.html">简体中文</a>
     <div class="container">
       <h1>
         Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization

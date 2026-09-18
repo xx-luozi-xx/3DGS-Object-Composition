@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>3DGS 实时物体合成</title>
+
+  <style>
+    :root {
+      --text-color: #222;
+      --muted-color: #666;
+      --border-color: #e5e5e5;
+      --background-color: #ffffff;
+      --section-background: #fafafa;
+      --link-color: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background-color);
+      color: var(--text-color);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1280px, 94%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 70px 0 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 auto 18px;
+      max-width: 1200px;
+      font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .authors {
+      margin: 12px 0 6px;
+      font-size: 1.6rem;
+    }
+
+    .affiliation {
+      color: var(--muted-color);
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 25px 0 35px;
+    }
+
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 100;
+      padding: 6px 16px;
+      border: 1px solid #222;
+      border-radius: 999px;
+      background: white;
+      color: #222;
+      font-size: 0.9rem;
+      transition: 0.2s ease;
+    }
+
+    .lang-switch:hover {
+      background: #222;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 999px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .button svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .teaser {
+      width: 100%;
+      max-width: 1240px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    section {
+      padding: 50px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    section:nth-of-type(even) {
+      background: var(--section-background);
+    }
+
+    h2 {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 2rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .text {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.18rem;
+      text-align: justify;
+    }
+
+    .framework-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .framework-image {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .framework-description {
+      font-size: 1.15rem;
+    }
+
+    .video-wrapper {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      background: #000;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .caption {
+      margin-top: 12px;
+      color: var(--muted-color);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .citation {
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 1.05rem;
+      background: #f5f5f5;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted-color);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding-top: 45px;
+      }
+
+      .framework-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      section {
+        padding: 38px 0;
+      }
+
+      .text,
+      .framework-description {
+        font-size: 1rem;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="lang-switch" href="index.html">English</a>
+
+    <div class="container">
+      <h1>
+        基于物理驱动光传输分解的3D高斯泼溅实时物体合成
+      </h1>
+
+      <div class="authors">
+        <a href="https://github.com/xx-luozi-xx" target="_blank" rel="noopener">杜柏言</a><sup>1</sup>,
+        <a href="https://github.com/junkzhu" target="_blank" rel="noopener">朱均可</a><sup>1</sup>,
+        <a href="" target="_blank" rel="noopener">党浩川</a><sup>1</sup>,
+        <a href="https://github.com/Alan-sp" target="_blank" rel="noopener">李昂</a><sup>2</sup>,
+        <a href="https://github.com/HuJX2005" target="_blank" rel="noopener">胡吉祥</a><sup>2</sup>,
+        <a href="https://lishengpku.github.io/" target="_blank" rel="noopener">李胜</a><sup>2</sup>,
+        <a href="http://staff.ustc.edu.cn/~zhuang/" target="_blank" rel="noopener">黄章进</a><sup>1,*</sup>
+      </div>
+
+      <div class="affiliation">
+        <sup>1</sup>中国科学技术大学<br />
+        <sup>2</sup>北京大学
+      </div>
+
+      <div class="links">
+        <a
+          class="button"
+          href="https://github.com/xx-luozi-xx/3DGS-Object-Composition"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                     0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                     -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                     .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                     -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+                     .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+                     .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+                     0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+          代码
+        </a>
+
+        <a class="button" href="paper.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5.5L9.5 0H4Zm5 1.5L12.5 5H9.5a.5.5
+                     0 0 1-.5-.5V1.5ZM4.5 8h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1Zm0 2.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1
+                     0-1Z"/>
+          </svg>
+          论文
+        </a>
+      </div>
+
+      <img
+        class="teaser"
+        src="assets/teaser.png"
+        alt="3DGS 物体合成效果图"
+      />
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Abstract -->
+    <section>
+      <div class="container">
+        <h2>摘要</h2>
+
+        <div class="text">
+          <p>
+            把已有的 PBR 高斯资产放进预训练好的 3D 高斯泼溅（3DGS）场景，并让光照看起来真实自然，这件事依然很费算力——现有方法要么做昂贵的射线追踪，要么提前预计算可见性。我们提出了一种免训练、即插即用的光传输方案，能在 3DGS 里实时合成物体。这套方案搭了两座桥梁：一，把 3DGS 的辐射场和 PBR 的入射光照接起来——从高斯基元里取出入射辐照度场，再把半球 PBR 积分拆成漫反射、镜面反射和透射三部分；二，把 3DGS 的可见性和延迟阴影接起来——直接从高斯泼溅算出带不透明度权重的光空间深度矩。由此得到的统一可见性积分，把物体自遮挡和物体投到场景上的阴影统一处理，从而用协方差软阴影（VSSM）完成合成，不再需要体素光线步进。在合成和真实数据集上的实验表明，无需重新训练就能获得高保真的光照、阴影和透射效果。在消费级硬件上帧率超过 40 FPS，兼顾了画质和实时性，可用于交互式场景编辑和增强现实。代码已开源：<a href="https://github.com/xx-luozi-xx/3DGS-Object-Composition">https://github.com/xx-luozi-xx/3DGS-Object-Composition</a>。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Framework -->
+    <section>
+      <div class="container">
+        <h2>框架</h2>
+
+        <div class="framework-layout">
+          <div>
+            <img
+              class="framework-image"
+              src="assets/framework.png"
+              alt="框架总览"
+            />
+          </div>
+
+          <div class="framework-description">
+            <p>
+              整个框架由两个管线组成。
+            </p>
+
+            <p>
+              <em>场景管线（上）：</em>
+              给定一个预训练好的 3DGS 场景，先通过最优投影得到无遮挡的入射辐照度场。投影后的高斯基元输入物理驱动的光传输分解模块，把入射辐照度拆成漫反射和镜面反射两部分，再烘焙成一个紧凑的全景辐照度探针——整个过程不需要训练任何网络
+            </p>
+
+            <p>
+              <em>资产管线（下）：</em>
+              虚拟物体以 PBR 高斯资产的形式表示，通过标准高斯泼溅单独光栅化。着色时，每个表面点去查预先建好的辐照度探针，计算其漫反射、镜面反射和透射分量。同时，从光源视角光栅化深度，把场景遮挡和物体自阴影统一到同一个 VSSM 框架里处理，不需要光线步进就能得到高质量的动态软阴影
+            </p>
+
+            <p>
+              两条管线最后在延迟渲染通道里合成，在普通消费级硬件上就能以超过 40 FPS 的速度生成物理可信的结果
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video -->
+    <section>
+      <div class="container">
+        <h2>视频</h2>
+
+        <div class="video-wrapper">
+          <video controls playsinline preload="metadata">
+            <source src="assets/demo.mp4" type="video/mp4" />
+            您的浏览器不支持视频标签。
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation">
+      <div class="container">
+        <h2>引用</h2>
+
+        <div class="citation">@inproceedings{du2026realtime,
+    title     = {Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization},
+    author    = {
+        Du, Boyan and
+        Zhu, Junke and
+        Dang, Haochuan and
+        Li, Ang and
+        Hu, Jixiang and
+        Li, Sheng and
+        Huang, Zhangjin
+    },
+    booktitle = {Pacific Graphics 2026},
+    year      = {2026}
+}</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      3DGS 物体合成项目主页。
+    </div>
+  </footer>
+
+</body>
+</html>
