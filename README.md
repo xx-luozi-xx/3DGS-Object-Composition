@@ -6,7 +6,7 @@
 
 ![Teaser](https://github.com/xx-luozi-xx/3DGS-Object-Composition/blob/main/assets/teaser.png?raw=true)
 
-### [[Paper]](https://raw.githubusercontent.com/xx-luozi-xx/3DGS-Object-Composition/main/assets/paper.pdf)
+### [[Paper]](https://raw.githubusercontent.com/xx-luozi-xx/3DGS-Object-Composition/main/assets/paper.pdf)[[Project]](https://xx-luozi-xx.github.io/3DGS-Object-Composition/)
 
 [Boyan Du](https://github.com/xx-luozi-xx), [Junke Zhu](https://github.com/junkzhu), [Haochuan Dang](), [Ang Li](https://github.com/Alan-sp), [Jixiang Hu](https://github.com/HuJX2005), [Sheng Li](https://lishengpku.github.io/), [Zhangjin Huang](http://staff.ustc.edu.cn/~zhuang/)
 
