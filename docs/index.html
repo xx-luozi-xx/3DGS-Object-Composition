@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>3DGS Object Composition</title>
+
+  <style>
+    :root {
+      --text-color: #222;
+      --muted-color: #666;
+      --border-color: #e5e5e5;
+      --background-color: #ffffff;
+      --section-background: #fafafa;
+      --link-color: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background-color);
+      color: var(--text-color);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+.container {
+  width: min(1280px, 94%);   /* 更宽的内容区 */
+  margin: 0 auto;
+}
+
+    header {
+      padding: 70px 0 40px;
+      text-align: center;
+    }
+
+    h1 {
+  margin: 0 auto 18px;
+  max-width: 1200px;                        /* 原来 950px，加大 */
+  font-size: clamp(1.8rem, 4.4vw, 2.8rem);  /* 原来上限 2.2rem，加大 */
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+    .authors {
+      margin: 12px 0 6px;
+      font-size: 1.6rem;
+    }
+
+    .affiliation {
+      color: var(--muted-color);
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 25px 0 35px;
+    }
+
+    .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                    /* 图标和文字间距 */
+  padding: 10px 22px;
+  border: none;                /* 黑底不需要边框 */
+  border-radius: 999px;        /* 胶囊形 */
+  background: #1a1a1a;         /* 黑底 */
+  color: #fff;                 /* 白字 */
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: #333;            /* hover 变浅一点 */
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px); /* 轻微上浮，可选 */
+}
+
+.button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;          /* 图标跟随文字颜色 */
+  flex-shrink: 0;
+}
+
+    .teaser {
+      width: 100%;
+      max-width: 1240px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    section {
+      padding: 50px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    section:nth-of-type(even) {
+      background: var(--section-background);
+    }
+
+    h2 {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 2rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .text {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.18rem;
+      text-align: justify;
+    }
+
+    .framework-layout {
+  display: grid;
+  grid-template-columns: 1fr;   /* 只留一列 → 上下结构 */
+  gap: 38px;
+  align-items: center;
+}
+
+    .framework-image {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .framework-description {
+      font-size: 1.15rem;
+    }
+
+    .video-wrapper {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      background: #000;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .caption {
+      margin-top: 12px;
+      color: var(--muted-color);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+.citation {
+  white-space: pre-wrap;   /* 保留换行和空格，同时仍可自动换行 */
+  font-family: monospace;  /* 等宽字体，BibTeX 更整齐 */
+  font-size: 1.05rem;  
+  background: #f5f5f5;     /* 可选：加个浅底色 */
+  padding: 1rem 1.2rem;    /* 可选：内边距 */
+  border-radius: 8px;      /* 可选：圆角 */
+  overflow-x: auto;        /* 可选：万一某行太长可横向滚动 */
+}
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted-color);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding-top: 45px;
+      }
+
+      .framework-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      section {
+        padding: 38px 0;
+      }
+
+      .text,
+      .framework-description {
+        font-size: 1rem;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <h1>
+        Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization
+      </h1>
+
+      <div class="authors">
+        <a href="https://github.com/xx-luozi-xx" target="_blank" rel="noopener">Boyan Du</a><sup>1</sup>,
+        <a href="https://github.com/junkzhu" target="_blank" rel="noopener">Junke Zhu</a><sup>1</sup>,
+        <a href="" target="_blank" rel="noopener">Haochuan Dang</a><sup>1</sup>,
+        <a href="https://github.com/Alan-sp" target="_blank" rel="noopener">Ang Li</a><sup>2</sup>,
+        <a href="https://github.com/HuJX2005" target="_blank" rel="noopener">Jixiang Hu</a><sup>2</sup>,
+        <a href="https://lishengpku.github.io/" target="_blank" rel="noopener">Sheng Li</a><sup>2</sup>,
+        <a href="http://staff.ustc.edu.cn/~zhuang/" target="_blank" rel="noopener">Zhangjin Huang</a><sup>1,*</sup>
+      </div>
+      <div class="affiliation">
+        <sup>1</sup>University of Science and Technology of China<br />
+        <sup>2</sup>Peking University
+      </div>
+      
+      <div class="links">
+        <a
+          class="button"
+          href="https://github.com/xx-luozi-xx/3DGS-Object-Composition"
+          target="_blank"
+          rel="noopener"
+        >
+          <!-- GitHub 图标 -->
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                     0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                     -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                     .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                     -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+                     .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+                     .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+                     0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+          Code
+        </a>
+      
+        <a class="button" href="paper.pdf" target="_blank" rel="noopener">
+          <!-- 文档 / PDF 图标 -->
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5.5L9.5 0H4Zm5 1.5L12.5 5H9.5a.5.5
+                     0 0 1-.5-.5V1.5ZM4.5 8h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1Zm0 2.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1
+                     0-1Z"/>
+          </svg>
+          Paper
+        </a>
+      </div>
+      <!-- 头图 -->
+      <img
+        class="teaser"
+        src="assets/teaser.png"
+        alt="3DGS Object Composition teaser image"
+      />
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Abstract -->
+    <section>
+      <div class="container">
+        <h2>Abstract</h2>
+
+        <div class="text">
+          <p>
+            <!-- 将这里替换为论文摘要 -->
+            Inserting known PBR Gaussian assets into pre-trained 3D Gaussian Splatting (3DGS) scenes with physically plausible light transport remains computationally challenging, as existing methods rely on costly ray tracing or visibility precomputation. We propose a training-free, plug-and-play light-transport reformulation for real-time object composition in 3DGS. Our formulation establishes two bridges. First, it connects 3DGS radiance to PBR incident illumination by extracting the incident radiance field from Gaussian primitives and decomposing the hemispherical PBR integral into diffuse, specular, and transmissive components. Second, it connects 3DGS visibility to deferred shadowing by deriving opacity-weighted light-space depth moments directly from Gaussian splatting. The resulting shared visibility integral unifies object self-occlusion and object-to-scene shadows, enabling Variance Soft Shadow Mapping (VSSM)-based composition without voxel ray marching. Experiments on synthetic and real-world datasets demonstrate high-fidelity integration with plausible illumination, shadows, and transmissive effects without retraining. Running at over 40 FPS on consumer hardware, our framework combines rendering quality with real-time efficiency for interactive scene editing and augmented reality. Our code is publicly available at <a href="https://github.com/xx-luozi-xx/3DGS-Object-Composition">https://github.com/xx-luozi-xx/3DGS-Object-Composition</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Framework -->
+    <section>
+      <div class="container">
+        <h2>Framework</h2>
+
+        <div class="framework-layout">
+          <div>
+            <img
+              class="framework-image"
+              src="assets/framework.png"
+              alt="Framework overview"
+            />
+          </div>
+
+          <div class="framework-description">
+            <p>
+                The framework operates via two parallel streams.
+              </p>
+              
+              <p>
+                <em>Scene Stream (top):</em>
+                Given a pre-trained 3DGS scene, we first derive the unoccluded incident radiance field via optimal projection.
+                The projected Gaussian primitives then pass through our physics-driven light transport factorization module,
+                analytically decomposing the incident radiance into diffuse irradiance and specular radiance components,
+                which are subsequently baked into a compact panoramic radiance probe without any network training.
+              </p>
+              
+              <p>
+                <em>Asset Stream (bottom):</em>
+                A virtual object, represented as a PBR Gaussian asset, is independently rasterized via standard Gaussian splatting.
+                During shading, each surface point queries the pre-built radiance probe to evaluate its diffuse, specular,
+                and transmissive material responses. Concurrently, by evaluating depth from the light source's perspective,
+                scene-level occlusion and object self-shadowing are unified under a single VSSM formulation, enabling
+                high-quality dynamic soft shadows without ray-marching.
+              </p>
+              
+              <p>
+                The two streams are composited in a deferred rendering pass, producing a seamlessly integrated result
+                at over 40 FPS on standard consumer hardware.
+              </p>
+            <!-- 根据你的真实方法修改以上三段说明 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video -->
+    <section>
+      <div class="container">
+        <h2>Video</h2>
+
+        <div class="video-wrapper">
+          <video controls playsinline preload="metadata">
+            <source src="assets/demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation">
+      <div class="container">
+        <h2>Citation</h2>
+
+        <div class="citation">@inproceedings{du2026realtime,
+    title     = {Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization},
+    author    = {
+        Du, Boyan and
+        Zhu, Junke and
+        Dang, Haochuan and
+        Li, Ang and
+        Hu, Jixiang and
+        Li, Sheng and
+        Huang, Zhangjin
+    },
+    booktitle = {Pacific Graphics 2026},
+    year      = {2026}
+}</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      Project page for 3DGS Object Composition.
+    </div>
+  </footer>
+
+</body>
+</html>
