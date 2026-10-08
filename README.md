@@ -164,7 +164,7 @@ python main_bicycle_video.py
 If you find this work useful in your research, please consider citing:
 
 ```bibtex
-@inproceedings{10.2312:pg.20261034,
+@inproceedings{du2026realtime,
     booktitle = {Pacific Graphics 2026 - Conference Papers and Posters},
     editor = {He, Ying and Thuerey, Nils and Liu, Lingjie},
     title = {{Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization}},
